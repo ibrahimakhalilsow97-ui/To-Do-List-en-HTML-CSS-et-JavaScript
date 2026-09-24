@@ -16,7 +16,8 @@
   --accent: #4e63d8;
   --accent-hover: #3f53c4;
   --accent-soft: #eef1ff;
-  --success: #17805e;
+  --highlight-yellow: #f2c94c;
+  --highlight-ink: #806000;
   --danger: #b54747;
   --radius: 14px;
 }
@@ -138,14 +139,14 @@ h1 {
   display: block;
   width: 0;
   height: 100%;
-  background: var(--success);
+  background: var(--highlight-yellow);
   border-radius: inherit;
   transition: width 220ms ease;
 }
 
 .progress-percent {
   min-width: 34px;
-  color: var(--success);
+  color: var(--highlight-ink);
   font-size: 0.75rem;
   font-weight: 700;
   text-align: right;
@@ -313,15 +314,15 @@ h1 {
 }
 
 .task-check:checked {
-  background: var(--success);
-  border-color: var(--success);
+  background: var(--highlight-yellow);
+  border-color: var(--highlight-yellow);
 }
 
 .task-check:checked::after {
   width: 5px;
   height: 9px;
-  border-right: 2px solid #ffffff;
-  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
   content: "";
   transform: rotate(42deg) translate(-1px, -1px);
 }
