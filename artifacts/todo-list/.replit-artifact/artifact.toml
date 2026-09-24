@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Ma To Do List"
+description = "Une liste de tâches personnelle, réalisée en HTML, CSS et JavaScript uniquement. Permet d’ajouter des tâches, de les marquer comme accomplies et de les retrouver après actualisation grâce au stockage local du navigateur."
+version = "1.0.0"
+id = "artifacts/todo-list"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19971
+
+[services.development]
+run = "pnpm --filter @workspace/todo-list run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/todo-list", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/todo-list/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19971"
+BASE_PATH = "/"

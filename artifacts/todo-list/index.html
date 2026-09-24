@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Ma liste du jour</title>
+    <meta name="description" content="Une liste de tâches simple pour garder le fil de sa journée." />
+    <meta property="og:title" content="Ma To Do List" />
+    <meta property="og:description" content="Une liste de tâches simple pour garder le fil de sa journée." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ma liste du jour" />
+    <meta name="twitter:description" content="Une liste de tâches simple pour garder le fil de sa journée." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23d9664d'/%3E%3Cpath d='m17 33 10 10 21-23' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='6'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="%BASE_URL%todo.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="todo-container" aria-labelledby="page-title">
+        <header class="page-header">
+          <div class="eyebrow">
+            <span class="eyebrow-mark" aria-hidden="true"></span>
+            <span>Mon espace du jour</span>
+          </div>
+          <h1 id="page-title">Ma liste<span class="title-accent">.</span></h1>
+          <p class="intro">Les petites choses qui méritent une place claire dans votre journée.</p>
+        </header>
+
+        <div class="progress-strip" aria-live="polite">
+          <div>
+            <span class="progress-label">Aujourd’hui</span>
+            <span id="taskSummary" class="progress-summary">0 tâche</span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressBar" class="progress-value"></span>
+          </div>
+          <span id="progressPercent" class="progress-percent">0%</span>
+        </div>
+
+        <form id="taskForm" class="todo-input" novalidate>
+          <label class="sr-only" for="taskInput">Nouvelle tâche</label>
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Qu’est-ce qui compte aujourd’hui ?"
+            autocomplete="off"
+            maxlength="160"
+            aria-describedby="inputHint inputError"
+          />
+          <button id="addButton" type="submit">
+            <span>Ajouter</span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+        </form>
+        <p id="inputHint" class="input-hint">Appuyez sur Entrée pour ajouter rapidement</p>
+        <p id="inputError" class="input-error" role="alert" aria-live="assertive"></p>
+
+        <div class="list-heading">
+          <h2>À faire</h2>
+          <span class="list-rule" aria-hidden="true"></span>
+        </div>
+        <ul id="taskList" class="task-list" aria-live="polite" aria-label="Liste des tâches"></ul>
+        <div id="emptyState" class="empty-state">
+          <span class="empty-marker" aria-hidden="true">+</span>
+          <p>Votre liste est légère pour l’instant.</p>
+          <span>Ajoutez une première intention ci-dessus.</span>
+        </div>
+      </section>
+      <footer class="page-footer">
+        <span>Une chose après l’autre</span>
+        <span class="footer-dot" aria-hidden="true"></span>
+        <span>Votre rythme, votre liste</span>
+      </footer>
+    </main>
+    <script type="module" src="%BASE_URL%todo.js"></script>
+  </body>
+</html>
