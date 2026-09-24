@@ -10,11 +10,24 @@
   const progressBar = document.getElementById("progressBar");
   const progressPercent = document.getElementById("progressPercent");
 
+  const exampleTasks = [
+    { text: "Préparer la liste de courses", completed: true },
+    { text: "Ranger le bureau", completed: true },
+    { text: "Répondre aux courriels", completed: false },
+    { text: "Lire 10 pages", completed: false }
+  ];
+
   let tasks = loadTasks();
 
   function loadTasks() {
     try {
-      const savedTasks = JSON.parse(localStorage.getItem("tasks"));
+      const storedTasks = localStorage.getItem("tasks");
+      if (storedTasks === null) {
+        localStorage.setItem("tasks", JSON.stringify(exampleTasks));
+        return exampleTasks.map((task) => ({ ...task }));
+      }
+
+      const savedTasks = JSON.parse(storedTasks);
       if (!Array.isArray(savedTasks)) {
         return [];
       }
