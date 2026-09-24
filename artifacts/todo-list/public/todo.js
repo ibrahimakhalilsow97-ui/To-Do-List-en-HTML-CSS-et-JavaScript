@@ -9,6 +9,8 @@
   const taskSummary = document.getElementById("taskSummary");
   const progressBar = document.getElementById("progressBar");
   const progressPercent = document.getElementById("progressPercent");
+  const clearCompletedButton = document.getElementById("clearCompletedButton");
+  const completedCount = document.getElementById("completedCount");
 
   const exampleTasks = [
     { text: "Préparer la liste de courses", completed: true },
@@ -55,6 +57,14 @@
     taskSummary.textContent = totalTasks + (totalTasks === 1 ? " tâche" : " tâches");
     progressBar.style.width = percentage + "%";
     progressPercent.textContent = percentage + "%";
+    completedCount.textContent = String(completedTasks);
+    clearCompletedButton.disabled = completedTasks === 0;
+    clearCompletedButton.setAttribute(
+      "aria-label",
+      completedTasks === 1
+        ? "Effacer la tâche terminée"
+        : "Effacer les " + completedTasks + " tâches terminées"
+    );
   }
 
   function createTaskElement(task, index) {
@@ -147,10 +157,26 @@
     displayTasks();
   }
 
+  function clearCompletedTasks() {
+    const remainingTasks = tasks.filter(function (task) {
+      return !task.completed;
+    });
+
+    if (remainingTasks.length === tasks.length) {
+      return;
+    }
+
+    tasks = remainingTasks;
+    saveTasks();
+    displayTasks();
+  }
+
   taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
     addTask();
   });
+
+  clearCompletedButton.addEventListener("click", clearCompletedTasks);
 
   taskInput.addEventListener("input", function () {
     if (taskInput.value.trim() !== "") {
