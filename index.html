@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Ma liste du jour</title>
+  <meta name="description" content="Une liste de tâches simple pour garder le fil de sa journée." />
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("todo-theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme =
+        savedTheme === "dark" || (savedTheme !== "light" && prefersDark) ? "dark" : "light";
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
+  <meta property="og:title" content="Ma To Do List" />
+  <meta property="og:description" content="Une liste de tâches simple pour garder le fil de sa journée." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ma liste du jour" />
+  <meta name="twitter:description" content="Une liste de tâches simple pour garder le fil de sa journée." />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23d9664d'/%3E%3Cpath d='m17 33 10 10 21-23' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='6'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./artifacts/todo-list/public/todo.css" />
+</head>
+
+<body>
+  <main class="page-shell">
+    <section class="todo-container" aria-labelledby="page-title">
+      <header class="page-header">
+        <div class="header-topline">
+          <p class="eyebrow">Espace personnel</p>
+          <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false"
+            aria-label="Activer le thème sombre">
+            <span id="themeIcon" aria-hidden="true">☾</span>
+            <span id="themeToggleText">Mode sombre</span>
+          </button>
+        </div>
+        <h1 id="page-title">Ma liste de tâches</h1>
+        <p class="intro">Organisez votre journée, une tâche à la fois.</p>
+      </header>
+
+      <div class="progress-strip" aria-live="polite">
+        <div>
+          <span class="progress-label">Aujourd’hui</span>
+          <span id="taskSummary" class="progress-summary">0 tâche</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progressBar" class="progress-value"></span>
+        </div>
+        <span id="progressPercent" class="progress-percent">0%</span>
+      </div>
+
+      <form id="taskForm" class="todo-input" novalidate>
+        <label class="sr-only" for="taskInput">Nouvelle tâche</label>
+        <input type="text" id="taskInput" placeholder="Ajouter une nouvelle tâche…" autocomplete="off" maxlength="160"
+          aria-describedby="inputHint inputError" />
+        <button id="addButton" type="submit">
+          Ajouter
+        </button>
+      </form>
+      <p id="inputHint" class="input-hint">
+        Entrée pour ajouter · Suppr sur une tâche sélectionnée pour la supprimer
+      </p>
+      <p id="inputError" class="input-error" role="alert" aria-live="assertive"></p>
+
+      <div class="list-heading">
+        <h2 id="taskHeading">Toutes les tâches</h2>
+        <button id="clearCompletedButton" class="clear-completed-button" type="button" disabled>
+          <span aria-hidden="true">✓</span>
+          <span>Effacer les terminées</span>
+          <span id="completedCount" class="completed-count">0</span>
+        </button>
+      </div>
+      <div class="task-filters" role="group" aria-label="Filtrer les tâches">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">
+          <span>Toutes</span>
+          <span id="allTaskCount" class="filter-count">0</span>
+        </button>
+        <button class="filter-button" type="button" data-filter="active" aria-pressed="false">
+          <span>Actives</span>
+          <span id="activeTaskCount" class="filter-count">0</span>
+        </button>
+        <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">
+          <span>Terminées</span>
+          <span id="completedTaskCount" class="filter-count">0</span>
+        </button>
+      </div>
+      <ul id="taskList" class="task-list" aria-live="polite" aria-label="Liste des tâches"></ul>
+      <div id="emptyState" class="empty-state">
+        <span class="empty-marker" aria-hidden="true">+</span>
+        <p id="emptyTitle">Votre liste est légère pour l’instant.</p>
+        <span id="emptyMessage">Ajoutez une première tâche ci-dessus.</span>
+      </div>
+    </section>
+    <footer class="page-footer">
+      Vos tâches sont enregistrées automatiquement sur cet appareil.
+    </footer>
+  </main>
+  <script type="module" src="./artifacts/todo-list/public/todo.js"></script>
+</body>
+
+</html>

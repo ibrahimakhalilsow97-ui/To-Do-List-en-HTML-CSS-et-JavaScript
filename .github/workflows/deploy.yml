@@ -40,7 +40,7 @@ jobs:
 
       - name: Build application
         env:
-          BASE_PATH: /${{ github.event.repository.name }}/
+          BASE_PATH: ./
           PORT: 5000
         run: |
           pnpm --filter @workspace/todo-list build
