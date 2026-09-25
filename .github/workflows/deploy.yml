@@ -42,7 +42,9 @@ jobs:
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
           PORT: 5000
-        run: pnpm --filter @workspace/todo-list build
+        run: |
+          pnpm --filter @workspace/todo-list build
+          cp ./artifacts/todo-list/dist/public/index.html ./artifacts/todo-list/dist/public/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
